@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zed.shopping.mapper.BuMenMapper">
+
+    <resultMap type="com.zed.shopping.pojo.BuMen" id="BuMenMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="bumenmingcheng" column="bumenmingcheng" jdbcType="VARCHAR"/>
+        <result property="chenglishijian" column="chenglishijian" jdbcType="TIMESTAMP"/>
+        <result property="bumenmiaoshu" column="bumenmiaoshu" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="allColumn">
+        id, bumenmingcheng, chenglishijian, bumenmiaoshu
+    </sql>
+
+    <!--查询单个-->
+    <select id="chaXunFenYe" parameterType="java.util.Map" resultMap="BuMenMap">
+        select
+        <include refid="allColumn"/>
+        from gxa_shopping.bu_men
+        <where>
+            <!-- 判断是否传递了部门名称，如果存在名称，以like方式匹配 -->
+            <if test="mingCheng != null">
+                bumenmingcheng like "%"#{mingCheng}"%"
+            </if>
+        </where>
+        order by chenglishijian limit #{qiShiDian},10;
+    </select>
+
+    <select id="chaXunGeShu" parameterType="java.lang.String" resultType="int">
+        select count(id) from gxa_shopping.bu_men
+        <where>
+            <!-- 判断是否传递了部门名称，如果存在名称，以like方式匹配 -->
+            <if test="mingCheng != null">
+                bumenmingcheng like "%"#{mingCheng}"%"
+            </if>
+        </where>
+    </select>
+</mapper>

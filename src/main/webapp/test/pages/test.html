@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../utils/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+  hello test.html 123 我爱中国<br/>
+  <!-- 超级链接 简称 超链 -->
+  <a href="/pages/b.html">绝对路径的b页面</a><br/>
+  <a href="../../pages/b.html">相对路径的b页面</a><br/>
+
+  <form action="/login" method="post">
+      用户名：<input type="text" name="username" id="username"/><br/>
+      密码：<input type="password" name="password" id="password"/><br/>
+      <input type="submit" value="登录"/><br/>
+  </form>
+    <button onclick="login()">异步登录</button>
+</body>
+   <script>
+       function login() {
+           // document.getElementById(""); 通过一个标签的id值，得到此标签value值
+           // 每个标签中的name是为了网络传输，后端使用的key， id是为了本地页面调用获取的key
+           var username = document.getElementById("username").value;
+           var password = document.getElementById("password").value;
+           // 组装一个json数据，并且把json数据转换成一个String字符串数据
+           // js的json对象并不是java中的json对象格式，所以必须以字符串的形式传递，后台服务接收后重新组装
+           var v = JSON.stringify({id:'1', username: username,password: password});
+           $.ajax({
+               url: "/login02",
+               type: "post",
+               contentType: "application/json; charset=utf-8",
+               data: v,
+               dataType: "json",
+               success: function (json) {
+                   alert(json.msg);
+                   // 判断用户的登录状态，如果是200代表响应成功
+                   if(json.code === "200") {
+                        // alert("恭喜您！登录成功，稍后会跳转首页");
+                        window.location.href = "../../index.html";
+                   }
+               },
+               error: function (response) {
+                   alert(response);
+               }
+           });
+       }
+   </script>
+</html>

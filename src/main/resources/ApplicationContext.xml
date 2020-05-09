@@ -28,13 +28,13 @@
         <!--configLocation属性指定mybatis的核心配置文件-->
         <property name="configLocation" value="classpath:mybatis.xml" />
         <!-- 自动扫描mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
     </bean>
 
     <!--3. 自动扫描mybatis中pojo接口包，
            并且自动注入第二项创建的sessionfactory，初始化所有的mapper接口对象 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zed.shopping.pojo" />
+        <property name="basePackage" value="com.zed.shopping.mapper" />
     </bean>
 
     <!--4. 扫描service注解 -->
