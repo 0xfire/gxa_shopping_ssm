@@ -26,4 +26,7 @@ public interface BuMenMapper {
      * @return  返回总个数
      */
     int chaXunGeShu(@Param("mingCheng") String mingCheng);
+
+    void xinZeng(BuMen buMen);
+    void gengXinById(BuMen buMen);
 }

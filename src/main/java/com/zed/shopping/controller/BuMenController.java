@@ -42,4 +42,17 @@ public class BuMenController {
         return this.buMenService.chaXunFenYe(yeMa, buMenMingCheng);
     }
 
+    @RequestMapping(value = "/xinZeng", method = RequestMethod.POST)
+    @ApiOperation(value = "新增单一部门对象的接口",notes = "新增单一部门对象的接口",httpMethod = "post")
+    public Map<String, Object> xinZeng(@RequestBody @ApiParam(name = "buMen",value = "部门名称",required = true) BuMen buMen) {
+
+        return buMenService.xinZeng(buMen);
+    }
+
+    @RequestMapping(value = "/gengXinById", method = RequestMethod.POST)
+    @ApiOperation(value = "新增单一部门对象的接口",notes = "新增单一部门对象的接口",httpMethod = "post")
+    public Map<String, Object> gengXinById(@RequestBody @ApiParam(name = "buMen",value = "更新byId",required = true) BuMen buMen) {
+
+        return buMenService.gengXinById(buMen);
+    }
 }

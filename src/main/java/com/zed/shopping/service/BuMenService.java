@@ -13,4 +13,6 @@ import java.util.Map;
 public interface BuMenService {
 
     public Map<String, Object> chaXunFenYe(int yeMa, String mingCheng);
+    public Map<String,Object> xinZeng(BuMen buMen);
+    public Map<String,Object> gengXinById(BuMen buMen);
 }

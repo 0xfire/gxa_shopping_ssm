@@ -16,9 +16,10 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    @Resource
-    private UserMapper userMapper;
 
+    @Resource
+
+    private UserMapper userMapper;
     /**
      * 通过ID查询单条数据
      *

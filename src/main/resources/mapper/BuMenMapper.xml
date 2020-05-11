@@ -12,7 +12,18 @@
         id, bumenmingcheng, chenglishijian, bumenmiaoshu
     </sql>
 
-    <!--查询单个-->
+
+    <!--新增所有列-->
+    <insert id="xinZeng" parameterType="com.zed.shopping.pojo.BuMen">
+        insert into gxa_shopping.bu_men(id,bumenmingcheng, chenglishijian, bumenmiaoshu)
+        values (#{id},#{bumenmingcheng}, #{chenglishijian}, #{bumenmiaoshu})
+    </insert>
+
+    <update id="gengXinById" parameterType="com.zed.shopping.pojo.BuMen">
+        update gxa_shopping.bu_men t
+        set t.bumenmingcheng=#{bumenmingcheng},t.chenglishijian=#{chenglishijian},t.bumenmiaoshu=#{bumenmiaoshu}
+        where t.id = #{id}
+    </update>
     <select id="chaXunFenYe" parameterType="java.util.Map" resultMap="BuMenMap">
         select
         <include refid="allColumn"/>

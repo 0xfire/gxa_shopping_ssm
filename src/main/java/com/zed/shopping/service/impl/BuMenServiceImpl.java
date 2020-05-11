@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * (BuMen)表服务实现类
@@ -52,6 +53,29 @@ public class BuMenServiceImpl implements BuMenService {
         map.put("zongGeShu",zongGeShu);
         map.put("zongYeMa",zongYeMa);
         map.put("dangQianYeMa",yeMa);
+        return map;
+    }
+
+    @Override
+    public Map<String,Object> xinZeng(BuMen buMen) {
+        String uuid = UUID.randomUUID().toString().replaceAll("-","");
+        buMen.setId(uuid);
+        buMenMapper.xinZeng(buMen);
+        Map<String,Object> map = new HashMap<>();
+        map.put("code","200");
+        map.put("msg","新增成功");
+        map.put("id",uuid);
+
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> gengXinById(BuMen buMen) {
+        buMenMapper.gengXinById(buMen);
+        Map<String,Object> map = new HashMap<>();
+        map.put("code","200");
+        map.put("msg","修改成功");
+        map.put("id",buMen.getId());
         return map;
     }
 }

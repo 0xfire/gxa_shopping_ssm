@@ -46,7 +46,7 @@ li{
 a:hover{
     text-decoration: none;
 }
-
+button:focus {outline:none;}
 /*左侧导航的样式*/
 #nav{
     height: 100% ;

@@ -96,7 +96,7 @@ $(function () {
     /*新增部门*/
     $('.addBtn').click(function () {
         $.ajax({
-            url:'/api/bumen/xinZeng',
+            url:'/bumen/xinZeng',
             data:JSON.stringify({
                 "bumenmiaoshu":  $('#depText').val(),
                 "bumenmingcheng": $('#depName').val(),
@@ -121,7 +121,7 @@ $(function () {
     /*修改保存的时候*/
     $('.editBtn').click(function () {
         $.ajax({
-            url:'/api/bumen/gengXinById',
+            url:'/bumen/gengXinById',
             data:JSON.stringify({
                 "id": id,
                 "bumenmiaoshu": $('#depText2').val(),
@@ -132,12 +132,13 @@ $(function () {
             contentType:'application/json',
             success:function (res) {
                 if(res.code==200){
-                    console.log($('tbody').find(`[data-id=${id}]`));
-                    $('tbody').find('[data-id=${id}]').find('.depName').text($('#depName2').val());
-                    $('tbody').find('[data-id=${id}]').find('.depText').text($('#depText2').val());
-                    $('tbody').find('[data-id=${id}]').find('.depTime').text($('#depTime2').val());
+                    /*console.log($('tbody').find(`[data-id=${id}]`));*/
+                    $('tbody').find(`[data-id=${id}]`).find('.depName').text($('#depName2').val());
+                    $('tbody').find(`[data-id=${id}]`).find('.depText').text($('#depText2').val());
+                    $('tbody').find(`[data-id=${id}]`).find('.depTime').text($('#depTime2').val());
 
                     $('#myModal1').modal('hide')
+                    $('.resizeBtn').blur();
                 }
             }
         })

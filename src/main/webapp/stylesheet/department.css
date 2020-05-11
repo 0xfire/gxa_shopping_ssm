@@ -38,8 +38,9 @@
 .list tr,.list th{
     text-align: center;
 }
-
-
+.resizeBtn{
+    outline: none;
+}
 
 /*分页*/
 .pagination{
