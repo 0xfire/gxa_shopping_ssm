@@ -12,9 +12,8 @@
 
     <!--1.开启Springioc 自动扫描注解包  只对mvc的包做扫描  -->
     <context:component-scan base-package="com.zed.shopping.controller"/>
-    <context:component-scan base-package="com.zed.shopping.advice"/>
-    <context:component-scan base-package="com.zed.shopping.swagger"/>
-    <!--2. 开启注解，对jackson数据支持 并且放行所有的静态资源(html、css、js、图片、文件)-->
+
+    <!--2. 开启注解，对jackson数据支持 -->
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 

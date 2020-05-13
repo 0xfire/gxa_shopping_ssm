@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zed.shopping.mapper.ZhiWeiMapper">
+
+    <resultMap type="com.zed.shopping.pojo.ZhiWei" id="ZhiWeiMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="zhiweimingcheng" column="zhiweimingcheng" jdbcType="VARCHAR"/>
+        <result property="zhiweimiaoshu" column="zhiweimiaoshu" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ZhiWeiMap">
+        select
+          id, zhiweimingcheng, zhiweimiaoshu
+        from gxa_shopping.zhi_wei
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ZhiWeiMap">
+        select
+          id, zhiweimingcheng, zhiweimiaoshu
+        from gxa_shopping.zhi_wei
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ZhiWeiMap">
+        select
+          id, zhiweimingcheng, zhiweimiaoshu
+        from gxa_shopping.zhi_wei
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="zhiweimingcheng != null and zhiweimingcheng != ''">
+                and zhiweimingcheng = #{zhiweimingcheng}
+            </if>
+            <if test="zhiweimiaoshu != null and zhiweimiaoshu != ''">
+                and zhiweimiaoshu = #{zhiweimiaoshu}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into gxa_shopping.zhi_wei(zhiweimingcheng, zhiweimiaoshu)
+        values (#{zhiweimingcheng}, #{zhiweimiaoshu})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update gxa_shopping.zhi_wei
+        <set>
+            <if test="zhiweimingcheng != null and zhiweimingcheng != ''">
+                zhiweimingcheng = #{zhiweimingcheng},
+            </if>
+            <if test="zhiweimiaoshu != null and zhiweimiaoshu != ''">
+                zhiweimiaoshu = #{zhiweimiaoshu},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from gxa_shopping.zhi_wei where id = #{id}
+    </delete>
+
+</mapper>
