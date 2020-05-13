@@ -58,10 +58,10 @@
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel">
                     <div class="panel-body">
                         <ul>
-                            <li><a href="javascript:;">订单列表</a></li>
-                            <li><a href="javascript:;">订单设置</a></li>
-                            <li><a href="javascript:;">退货申请处理</a></li>
-                            <li><a href="javascript:;">退货原因设置</a></li>
+                            <li><a href="javascript:">订单列表</a></li>
+                            <li><a href="javascript:">订单设置</a></li>
+                            <li><a href="javascript:">退货申请处理</a></li>
+                            <li><a href="javascript:">退货原因设置</a></li>
                         </ul>
                     </div>
                 </div>
@@ -131,6 +131,7 @@
                             <td class="listPosText">测试账号1111111</td>
                             <td>
                                 <button class="btn btn-link" data-target="#myModal1" data-toggle="modal">编辑</button>
+                                <button class="btn btn-link" data-target="#myModal_del" data-toggle="modal">删除</button>
                             </td>
                         </tr>
                     </tbody>
@@ -185,12 +186,36 @@
         </div>
     </div>
 
+    <div class="modal fade" id="myModal_del" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                            aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="deleteModalLabel">删除确认</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="control-label">确定要删除吗？</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">返回</button>
+                    <button class="btn btn-primary" id="confirmDel" type="button">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--用户编辑弹出框-->
     <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel1">用户编辑</h4>
                 </div>
                 <div class="modal-body">
@@ -212,6 +237,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>

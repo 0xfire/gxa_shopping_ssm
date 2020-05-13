@@ -10,11 +10,11 @@ import java.io.Serializable;
  */
 public class ZhiWei implements Serializable {
     private static final long serialVersionUID = 991864919781930872L;
-    
+
     private String id;
-    
+
     private String zhiweimingcheng;
-    
+
     private String zhiweimiaoshu;
 
 

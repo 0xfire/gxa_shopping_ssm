@@ -1,8 +1,11 @@
 package com.zed.shopping.mapper;
 
+import com.zed.shopping.pojo.BuMen;
 import com.zed.shopping.pojo.ZhiWei;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * (ZhiWei)表数据库访问层
@@ -12,54 +15,13 @@ import java.util.List;
  */
 public interface ZhiWeiMapper {
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    ZhiWei queryById(String id);
+    List<ZhiWei> chaXunFenYe(Map<String, Object> map);
 
-    /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<ZhiWei> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    int chaXunGeShu(@Param("mingCheng") String mingCheng);
 
+    void shanChuZhiWeiById(@Param("id") String id);
 
-    /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param zhiWei 实例对象
-     * @return 对象列表
-     */
-    List<ZhiWei> queryAll(ZhiWei zhiWei);
+    void xinZeng(ZhiWei zhiWei);
 
-    /**
-     * 新增数据
-     *
-     * @param zhiWei 实例对象
-     * @return 影响行数
-     */
-    int insert(ZhiWei zhiWei);
-
-    /**
-     * 修改数据
-     *
-     * @param zhiWei 实例对象
-     * @return 影响行数
-     */
-    int update(ZhiWei zhiWei);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 影响行数
-     */
-    int deleteById(String id);
-
+    void gengXinById(ZhiWei zhiWei);
 }

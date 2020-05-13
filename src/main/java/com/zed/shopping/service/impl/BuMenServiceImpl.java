@@ -3,6 +3,9 @@ package com.zed.shopping.service.impl;
 import com.zed.shopping.pojo.BuMen;
 import com.zed.shopping.mapper.BuMenMapper;
 import com.zed.shopping.service.BuMenService;
+import com.zed.shopping.utils.ReturnCode;
+import com.zed.shopping.utils.ReturnMap;
+import com.zed.shopping.utils.ReturnMsg;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,21 +38,20 @@ public class BuMenServiceImpl implements BuMenService {
         // 计算总计页码
         int zongYeMa = (zongGeShu - 1) / 10 + 1;
         // 查询当前用户指定页码的分页数据
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new ReturnMap().
+                getMap(ReturnCode.CHENG_GONG, ReturnMsg.BU_MEN_FEN_YE);
         // 添加分页的起始下标点
         map.put("qiShiDian", qiShiDian);
         // 判断用户是否传入了职位名称
-        if(mingCheng != null && !mingCheng.equals("")) {
+        if (mingCheng != null && !mingCheng.equals("")) {
             map.put("mingCheng", mingCheng);
         }
         // 根据条件完成分页查询
         List<BuMen> buMenList = buMenMapper.chaXunFenYe(map);
-        // 重用map对象，首先清除内部数据
-        map.clear();
-        map.put("code", "200");
-        map.put("msg", "查询部门列表成功");
+
+
         map.put("list",buMenList);
-        map.put("buMenList",buMenList);
+        /*map.put("buMenList",buMenList);*/
         map.put("zongGeShu",zongGeShu);
         map.put("zongYeMa",zongYeMa);
         map.put("dangQianYeMa",yeMa);
@@ -58,24 +60,24 @@ public class BuMenServiceImpl implements BuMenService {
 
     @Override
     public Map<String,Object> xinZeng(BuMen buMen) {
-        String uuid = UUID.randomUUID().toString().replaceAll("-","");
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         buMen.setId(uuid);
         buMenMapper.xinZeng(buMen);
-        Map<String,Object> map = new HashMap<>();
-        map.put("code","200");
-        map.put("msg","新增成功");
-        map.put("id",uuid);
-
+        Map<String, Object> map = new ReturnMap().
+                getMap(ReturnCode.CHENG_GONG, ReturnMsg.Bu_MEN_XINZ_ENG);
+        map.put("id", uuid);
         return map;
     }
 
     @Override
     public Map<String, Object> gengXinById(BuMen buMen) {
         buMenMapper.gengXinById(buMen);
-        Map<String,Object> map = new HashMap<>();
-        map.put("code","200");
-        map.put("msg","修改成功");
-        map.put("id",buMen.getId());
+        Map<String, Object> map = new ReturnMap().
+                getMap(ReturnCode.CHENG_GONG, ReturnMsg.BU_MEN_GENG_XIN);
+
+        map.put("id", buMen.getId());
         return map;
     }
+    
+
 }

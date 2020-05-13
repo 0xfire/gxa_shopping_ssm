@@ -2,9 +2,11 @@ package com.zed.shopping.controller;
 
 import com.zed.shopping.pojo.ZhiWei;
 import com.zed.shopping.service.ZhiWeiService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * (ZhiWei)表控制层
@@ -13,7 +15,7 @@ import javax.annotation.Resource;
  * @since 2020-05-12 12:03:49
  */
 @RestController
-@RequestMapping("zhiWei")
+@RequestMapping("/zhiwei")
 public class ZhiWeiController {
     /**
      * 服务对象
@@ -21,15 +23,16 @@ public class ZhiWeiController {
     @Resource
     private ZhiWeiService zhiWeiService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public ZhiWei selectOne(String id) {
-        return this.zhiWeiService.queryById(id);
+
+    @RequestMapping(value = "/chaXunZhiWeiFenYe", method = RequestMethod.GET)
+    public Map<String, Object> chaXunZhiWeiFenYe(@RequestParam(name = "yeMa") int yeMa, String zhiWeiMingCheng) {
+
+        return this.zhiWeiService.chaXunFenYe(yeMa, zhiWeiMingCheng);
     }
 
+    @RequestMapping(value = "/shanChuZhiWeiById", method = RequestMethod.POST)
+    public Map<String, Object> shanChuZhiWeiById(@RequestParam(name = "id") String id) {
+        System.out.println(id);
+        return this.zhiWeiService.shanChuZhiWeiById(id);
+    }
 }

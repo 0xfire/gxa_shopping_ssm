@@ -8,63 +8,34 @@
         <result property="zhiweimiaoshu" column="zhiweimiaoshu" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="ZhiWeiMap">
-        select
-          id, zhiweimingcheng, zhiweimiaoshu
-        from gxa_shopping.zhi_wei
-        where id = #{id}
-    </select>
+    <sql id="allColumn">
+        id,zhiweimingcheng,zhiweimiaoshu
+    </sql>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ZhiWeiMap">
-        select
-          id, zhiweimingcheng, zhiweimiaoshu
-        from gxa_shopping.zhi_wei
-        limit #{offset}, #{limit}
-    </select>
 
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="ZhiWeiMap">
+    <select id="chaXunFenYe" parameterType="java.util.Map" resultMap="ZhiWeiMap">
         select
-          id, zhiweimingcheng, zhiweimiaoshu
+        <include refid="allColumn"/>
         from gxa_shopping.zhi_wei
         <where>
-            <if test="id != null and id != ''">
-                and id = #{id}
+            <!-- 判断是否传递了部门名称，如果存在名称，以like方式匹配 -->
+            <if test="mingCheng != null">
+                zhiweimingcheng like "%"#{mingCheng}"%"
             </if>
-            <if test="zhiweimingcheng != null and zhiweimingcheng != ''">
-                and zhiweimingcheng = #{zhiweimingcheng}
-            </if>
-            <if test="zhiweimiaoshu != null and zhiweimiaoshu != ''">
-                and zhiweimiaoshu = #{zhiweimiaoshu}
+        </where>
+        limit #{qiShiDian},10;
+    </select>
+
+    <select id="chaXunGeShu" parameterType="java.lang.String" resultType="int">
+        select count(id) from gxa_shopping.zhi_wei
+        <where>
+            <if test="mingCheng != null">
+                zhiweimingcheng like "%"#{mingCheng}"%"
             </if>
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into gxa_shopping.zhi_wei(zhiweimingcheng, zhiweimiaoshu)
-        values (#{zhiweimingcheng}, #{zhiweimiaoshu})
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update gxa_shopping.zhi_wei
-        <set>
-            <if test="zhiweimingcheng != null and zhiweimingcheng != ''">
-                zhiweimingcheng = #{zhiweimingcheng},
-            </if>
-            <if test="zhiweimiaoshu != null and zhiweimiaoshu != ''">
-                zhiweimiaoshu = #{zhiweimiaoshu},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
+    <delete id="shanChuZhiWeiById" parameterType="java.lang.String">
         delete from gxa_shopping.zhi_wei where id = #{id}
     </delete>
-
 </mapper>
